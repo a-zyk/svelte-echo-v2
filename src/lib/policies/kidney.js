@@ -1,10 +1,10 @@
 export default {
   title: "Inkstai",
   groups: [
-    { title: "Kairys inkstas", name: "left" },
+    { title: "Kairys inkstas", name: "leftKidney" },
     {
       title: "Dešinys inkstas",
-      name: "right",
+      name: "rightKidney",
     },
   ],
   inputs: [
@@ -13,27 +13,40 @@ export default {
       type: "radio",
       name: "cortexToSpleen",
       options: ["izoechogeniška", "hipoechogeniška", "hiperechogeniška"],
+      normalValue: "hipoechogeniška",
+      tooltip: {
+        leftKidney: "Normalaus kairio inksto žievė yra hipoechoiška blužniai.",
+
+        rightKidney:
+          "Normalaus dešinio inksto žievė yra hipoechoiška/izoechoiška kepenims.",
+      },
     },
     {
-      title: "Inksto ilgis",
+      title: "Inksto ilgis, cm",
       name: "length",
       type: "number",
+      tooltip:
+        "Normalus katės inksto ilgis ~3-4.5cm. Didesnis pas nekastruotus katinus, mažesnis senoms katėms.",
     },
     {
-      title: "Inksto plotis",
+      title: "Inksto plotis, cm",
       name: "width",
       type: "number",
+      tooltip: "Normalaus katės inksto plotis ~2.23-2.83cm.",
     },
     {
       title: "Inksto geldelė",
       type: "radio",
       name: "medulla",
       options: ["išsiplėtusi", "neišsiplėtusi"],
+      normalValue: "neišsiplėtusi",
     },
     {
       title: "Geldelės plotis skersiniame pjūvyje, cm",
       type: "number",
       name: "medullaWidth",
+      tooltip:
+        "Skersiniame pjūvyje normalus geldelės plotis ≤0.2cm. Plotis >1.3cm būdingas obstrukcijai.",
     },
     {
       title: "Kiti pakitimai",
@@ -54,10 +67,10 @@ export default {
     let description = "";
 
     if (inputsPresent(inputs)) {
-      if (group.name == "left") {
-        description += "Kairys inkstas. "
-      } else if (group.name == "right") {
-        description += "Dešinys inkstas. "
+      if (group.name == "leftKidney") {
+        description += "Kairys inkstas. ";
+      } else if (group.name == "rightKidney") {
+        description += "Dešinys inkstas. ";
       }
 
       if (cortexToSpleen) {

@@ -1,17 +1,19 @@
 export default {
   title: "Šlapimo pūslė",
+  name: "bladder",
   inputs: [
     {
       title: "Šlapimo pūslės sienelė",
       type: "radio",
       name: "wallThickness",
       options: ["sustorėjusi", "nesustorėjusi"],
+      normalValue: "nesustorėjusi"
     },
     {
       title: "Šlapimo pūslės sienelės storis, cm",
       name: "wallWidth",
       type: "number",
-      tooltip: "Normalus šlapimo pūslės sienelės storis 0.1cm"
+      tooltip: "Normalus šlapimo pūslės sienelės storis 0.1 cm"
     },
     {
       title: "Kiti pakitimai",
@@ -48,4 +50,6 @@ const generateBladderParameters = ({ wallThickness, wallWidth }) => {
   if (wallThickness == "nesustorėjusi" && !wallWidth) {
     return `Šlapimo pūslės sienelė nesustorėjusi. `;
   }
+
+  return ''
 };

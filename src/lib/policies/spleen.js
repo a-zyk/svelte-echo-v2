@@ -1,11 +1,13 @@
 export default {
   title: "Blužnis",
+  name: "spleen",
   inputs: [
     {
       title: "Blužnies parenchima",
       type: "radio",
       name: "homogenicity",
       options: ["homogeniška", "heterogeniška"],
+      normalValue: "homogeniška",
       tooltip: "Normali blužnies parenchima yra homogeniška.",
     },
     {
@@ -13,6 +15,7 @@ export default {
       type: "radio",
       name: "spleenToLiver",
       options: ["izoechogeniška", "hipoechogeniška", "hiperechogeniška"],
+      normalValue: "hiperechogeniška",
       tooltip:
         "Normali blužnies parenchima yra hiperechogeniška kepenų parenchimai",
     },
@@ -21,6 +24,7 @@ export default {
       type: "radio",
       name: "edges",
       options: ["aštrūs", "suapvalėję"],
+      normalValue: "aštrūs",
       tooltip: "Normalios blužnies kraštai yra aštrūs.",
     },
     {
@@ -36,14 +40,16 @@ export default {
 
     description += generateHomogenicity({ homogenicity, spleenToLiver });
 
-    if (edges) {
+    if (edges && !homogenicity && !spleenToLiver) {
       description += `Blužnies kraštai ${edges}. `;
+    } else if (edges) {
+      description += `Kraštai ${edges}. `;
     }
 
-    if (otherChanges ) {
+    if (otherChanges) {
       description += otherChanges;
     }
-    
+
     return description;
   },
 };
@@ -56,4 +62,6 @@ const generateHomogenicity = ({ homogenicity, spleenToLiver }) => {
   } else if (spleenToLiver) {
     return `Blužnies parenchima yra ${spleenToLiver} kepenų parenchimai. `;
   }
+
+  return "";
 };
