@@ -6,7 +6,7 @@ export default {
       title: "Blužnies parenchima",
       type: "radio",
       name: "homogenicity",
-      options: ["homogeniška", "heterogeniška"],
+      options: `["homogeniška", "heterogeniška"]`,
       normalValue: "homogeniška",
       tooltip: "Normali blužnies parenchima yra homogeniška.",
     },
