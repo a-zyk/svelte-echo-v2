@@ -2,14 +2,26 @@
   export let input;
   export let prefix;
   import { formInputs } from "./stores/formInputs";
-  import { getContext } from "svelte";
-  const { name } = input;
-  const normalValues = getContext("normalValues");
+  import normalValuesSelect from "$lib/stores/normalValuesSelect";
+  const { name, normalValue } = input;
+
+  let previousValue;
 
   $formInputs[prefix] = $formInputs[prefix] || {};
+
+  if (normalValue) {
+    normalValuesSelect.subscribe((value) => {
+      if (value) {
+        previousValue = $formInputs[prefix][name];
+        $formInputs[prefix][name] = normalValue;
+      } else {
+        $formInputs[prefix][name] = previousValue;
+      }
+    });
+  }
 </script>
 
-<div class="">
+<div>
   {#if input.type == "number"}
     <input
       bind:value={$formInputs[prefix][name]}

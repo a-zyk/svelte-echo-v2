@@ -1,3 +1,5 @@
+import inputsPresent from '$lib/helpers/inputsPresent'
+
 export default {
   title: "Žarnynas",
   name: "intestines",
@@ -46,7 +48,7 @@ export default {
     } = inputs;
 
     let description = "";
-
+    
     if (inputsPresent(inputs)) {
       if (group.name == "duodenum") {
         description += "Dvylikapirštė žarna. ";
@@ -69,6 +71,3 @@ export default {
   },
 };
 
-const inputsPresent = (inputs) => {
-  return Object.values(inputs).some((value) => value && value.length);
-};

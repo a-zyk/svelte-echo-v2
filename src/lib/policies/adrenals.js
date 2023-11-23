@@ -1,3 +1,5 @@
+import inputsPresent from '$lib/helpers/inputsPresent'
+
 export default {
   title: "Inkstai",
   groups: [
@@ -94,8 +96,4 @@ const generateSize = ({ frontWidth, backWidth, width }) => {
     description += `Galinis polius ${backWidth} cm. `;
   }
   return description;
-};
-
-const inputsPresent = (inputs) => {
-  return Object.values(inputs).some((value) => value && value.length);
 };

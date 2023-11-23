@@ -1,3 +1,5 @@
+import inputsPresent from '$lib/helpers/inputsPresent'
+
 export default {
   title: "Inkstai",
   name: "kidneys",
@@ -66,7 +68,6 @@ export default {
     } = inputs;
 
     let description = "";
-
     if (inputsPresent(inputs)) {
       if (group.name == "leftKidney") {
         description += "Kairys inkstas. ";
@@ -90,6 +91,7 @@ export default {
 
 const generateSize = ({ width, length }) => {
   let description = "";
+  
   if (length && !width) {
     description += `Inksto ilgis ${length} cm. `;
   }
@@ -114,8 +116,4 @@ const generateMedulla = ({ medulla, medullaWidth }) => {
     description += `Skersiniame pjūvyje geldelė ${medulla}, plotis ${medullaWidth} cm. `;
   }
   return description;
-};
-
-const inputsPresent = (inputs) => {
-  return Object.values(inputs).some((value) => value && value.length);
 };
