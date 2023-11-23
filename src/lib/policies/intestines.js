@@ -1,5 +1,6 @@
 export default {
   title: "Žarnynas",
+  name: "intestines",
   groups: [
     { title: "Dvylikapirštė žarna", name: "duodenum" },
     {

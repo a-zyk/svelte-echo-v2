@@ -1,5 +1,6 @@
 export default {
   title: "Inkstai",
+  name: "kidneys",
   groups: [
     { title: "Kairys inkstas", name: "leftKidney" },
     {
