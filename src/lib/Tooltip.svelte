@@ -1,6 +1,6 @@
 <script>
   import { Tooltip as TooltipIcon } from "$lib/icons";
-  import SvelteTooltip from "svelte-tooltip";
+  import { Tooltip } from "@svelte-plugins/tooltips";
   export let tooltip;
   export let prefix;
 
@@ -13,6 +13,9 @@
   }
 </script>
 
-<SvelteTooltip tip={tooltipText} right color="#7393B3" bottom>
-  <TooltipIcon />
-</SvelteTooltip>
+
+
+  <Tooltip content={tooltipText} position="right" >
+    <TooltipIcon />
+  </Tooltip>
+

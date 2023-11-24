@@ -11,7 +11,10 @@
     <div class="flex gap-2">
       <div>{input.title}</div>
       {#if input.tooltip}
-     <Tooltip {prefix} tooltip={input.tooltip}/>
+      <div class="max-w-[100px]">
+
+        <Tooltip {prefix} tooltip={input.tooltip}/>
+      </div>
       {/if}
     </div>
 
