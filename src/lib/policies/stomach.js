@@ -1,3 +1,10 @@
+import normalRangesPresent from "$lib/helpers/normalRangesPresent";
+const NORMAL_VALUES = {
+  wallWidth: {
+    cat: "0.2-0.4 cm",
+    dog: "0.2-0.5 cm",
+  },
+};
 export default {
   title: "Skrandis",
   name: "stomach",
@@ -15,13 +22,13 @@ export default {
       type: "text",
     },
   ],
-  generate: (inputs) => {
+  generate: (inputs, animalInfo) => {
     const { wallWidth, otherChanges } = inputs;
-
+let wallWidthNormalValue = normalRangesPresent(animalInfo, NORMAL_VALUES, "wallWidth")
     let description = "";
 
     if (wallWidth) {
-      description += `Skandžio sienelės storis ${wallWidth} cm. `;
+      description += `Skandžio sienelės storis ${wallWidth} cm${wallWidthNormalValue}. `;
     }
 
     if (otherChanges) {

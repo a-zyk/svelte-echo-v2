@@ -3,6 +3,7 @@
   import policies from "$lib/policy.js";
   import Description from "$lib/Description.svelte";
   import NormalValueSelect from "$lib/NormalValueSelect.svelte";
+  import AnimalInfo from "$lib/AnimalInfo.svelte";
 
   let checkedOrgans = [];
 
@@ -13,10 +14,9 @@
   $: matchedPolicies = matchOrgans(policies, checkedOrgans);
 </script>
 
-<NormalValueSelect />
-
 <Description policies={matchedPolicies} />
 
+<AnimalInfo />
 <div>Pasirinkti tirtus organus:</div>
 <div class="flex flex-col gap-2">
   {#each policies as policy}
@@ -30,8 +30,9 @@
       <label for={policy.name}>{policy.title}</label>
     </div>
   {/each}
-
-  <button>Kitas</button>
+  <div>
+    <NormalValueSelect />
+  </div>
 </div>
 {#each matchedPolicies as item}
   <PolicyInput {item} />

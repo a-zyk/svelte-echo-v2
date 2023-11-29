@@ -1,3 +1,14 @@
+import normalRangesPresent from "$lib/helpers/normalRangesPresent";
+const NORMAL_VALUES = {
+  ductusWidth: {
+    cat: "≤0.4 cm",
+    dog: "≤0.3 cm",
+  },
+  wallWidth: {
+    cat: "<0.1 cm",
+    dog: "<0.1 cm",
+  },
+};
 export default {
   title: "Tulžies pūslė ir bendrasis tulžies latakas",
   name: "gallblader",
@@ -37,7 +48,7 @@ export default {
       type: "text",
     },
   ],
-  generate: (inputs) => {
+  generate: (inputs, animalInfo) => {
     const { wallWidth, width, commonDuctus, commonDuctusWidth, otherChanges } =
       inputs;
 
@@ -46,9 +57,14 @@ export default {
     description += generateWallInfo({
       wallWidth,
       width,
+      animalInfo,
     });
 
-    description += generateDuctusInfo({ commonDuctus, commonDuctusWidth });
+    description += generateDuctusInfo({
+      commonDuctus,
+      commonDuctusWidth,
+      animalInfo,
+    });
 
     if (otherChanges) {
       description += otherChanges;
@@ -58,25 +74,39 @@ export default {
   },
 };
 
-const generateWallInfo = ({ wallWidth, width }) => {
+const generateWallInfo = ({ wallWidth, width, animalInfo }) => {
+  let wallWidthNormalValue = normalRangesPresent(
+    animalInfo,
+    NORMAL_VALUES,
+    "wallWidth"
+  );
   if (wallWidth && width) {
-    return `Tulžies pūslės sienelė ${wallWidth}, storis ${width} cm. `;
+    return `Tulžies pūslės sienelė ${wallWidth}, storis ${width} cm${wallWidthNormalValue}. `;
   } else if (wallWidth) {
     return `Tulžies pūslės sienelė ${wallWidth}. `;
   } else if (width) {
-    return `Tulžies pūslės sienelės storis ${width} cm. `;
+    return `Tulžies pūslės sienelės storis ${width} cm${wallWidthNormalValue}. `;
   }
 
   return "";
 };
 
-const generateDuctusInfo = ({ commonDuctus, commonDuctusWidth }) => {
+const generateDuctusInfo = ({
+  commonDuctus,
+  commonDuctusWidth,
+  animalInfo,
+}) => {
+  let ductusWidthNormalValue = normalRangesPresent(
+    animalInfo,
+    NORMAL_VALUES,
+    "ductusWidth"
+  );
   if (commonDuctus && commonDuctusWidth) {
-    return `Tulžies bendrasis latakas ${commonDuctus}, skersmuo ${commonDuctusWidth} cm. `;
+    return `Tulžies bendrasis latakas ${commonDuctus}, skersmuo ${commonDuctusWidth} cm${ductusWidthNormalValue}. `;
   } else if (commonDuctus) {
     return `Tulžies bendrasis latakas ${commonDuctus}. `;
   } else if (commonDuctusWidth) {
-    return `Tulžies bendrojo latako skersmuo ${commonDuctusWidth} cm. `;
+    return `Tulžies bendrojo latako skersmuo ${commonDuctusWidth} cm${ductusWidthNormalValue}. `;
   }
   return "";
 };

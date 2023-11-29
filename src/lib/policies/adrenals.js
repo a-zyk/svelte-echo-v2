@@ -1,4 +1,4 @@
-import inputsPresent from '$lib/helpers/inputsPresent'
+import inputsPresent from "$lib/helpers/inputsPresent";
 
 export default {
   title: "Inkstai",
@@ -24,27 +24,34 @@ export default {
       name: "frontWidth",
       type: "number",
       tooltip:
-        "Normalus katės inksto ilgis ~3-4.5cm. Didesnis pas nekastruotus katinus, mažesnis senoms katėms.",
+        "Normalus katės inksto ilgis ~3-4.5 cm. Didesnis pas nekastruotus katinus, mažesnis senoms katėms.",
+      descriptionNormalValues: {
+        cat: "1-1.1 cm",
+        dog: "1-5 cm",
+      },
     },
-    {
-      title: "Prieinksčio plotis, cm",
-      name: "backWidth",
-      type: "number",
-      tooltip: "Normalaus katės inksto plotis ~2.23-2.83cm.",
-    },
+
     {
       title: "Prieinksčio priekinio poliaus plotis, cm",
-      name: "width",
+      name: "frontWidth",
       type: "number",
       tooltip:
         "Normalus prieinksčio plotis katėms yra ~0.35-0.45cm , šunims: ~0.6-0.8cm.",
+      descriptionNormalValues: {
+        cat: "0.35-0.45 cm",
+        dog: "0.6-0.8 cm",
+      },
     },
     {
       title: "Prieinksčio galinio poliaus plotis, cm",
-      name: "width",
+      name: "backWidth",
       type: "number",
       tooltip:
         "Normalus prieinksčio plotis katėms yra ~0.35-0.45cm , šunims: ~0.6-0.8cm.",
+      descriptionNormalValues: {
+        cat: "0.35-0.45 cm",
+        dog: "0.6-0.8 cm",
+      },
     },
     {
       title: "Kiti pakitimai",
@@ -86,13 +93,13 @@ export default {
 
 const generateSize = ({ frontWidth, backWidth, width }) => {
   let description = "";
-  if (width && frontWidth && backWidth ) {
-    description += `Ilgis ${width}, priekinis polius ${frontWidth}, galinis polius ${backWidth} `;
+  if (width && frontWidth && backWidth) {
+    description += `Ilgis ${width}, priekinis polius ${frontWidth} cm, galinis polius ${backWidth} cm.`;
   } else if (width) {
     description += `Prieinksčio ilgis ${width} cm. `;
   } else if (frontWidth) {
     description += `Priekinis polius ${frontWidth} cm. `;
-  }else if (backWidth) {
+  } else if (backWidth) {
     description += `Galinis polius ${backWidth} cm. `;
   }
   return description;

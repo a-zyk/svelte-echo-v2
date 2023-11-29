@@ -1,3 +1,10 @@
+import normalRangesPresent from "$lib/helpers/normalRangesPresent";
+const NORMAL_VALUES = {
+  ductusWidth: {
+    cat: "≤0.1 cm",
+    dog: "≤0.06 cm",
+  },
+};
 export default {
   title: "Kasa",
   name: "pancreas",
@@ -24,7 +31,7 @@ export default {
       type: "text",
     },
   ],
-  generate: (inputs) => {
+  generate: (inputs, animalInfo) => {
     const { pancreasToFat, ductusWidth, otherChanges } = inputs;
 
     let description = "";
@@ -32,6 +39,7 @@ export default {
     description += generatePancreasInfo({
       pancreasToFat,
       ductusWidth,
+      animalInfo,
     });
 
     if (otherChanges) {
@@ -42,13 +50,18 @@ export default {
   },
 };
 
-const generatePancreasInfo = ({ pancreasToFat, ductusWidth }) => {
+const generatePancreasInfo = ({ pancreasToFat, ductusWidth, animalInfo }) => {
+  let ductusWidthNormalValue = normalRangesPresent(
+    animalInfo,
+    NORMAL_VALUES,
+    "ductusWidth"
+  );
   if (ductusWidth && pancreasToFat) {
-    return `Kasa supantiems riebalams ${pancreasToFat}, kasos latako skresmuo ${ductusWidth} cm. `;
+    return `Kasa supantiems riebalams ${pancreasToFat}, kasos latako skresmuo ${ductusWidth} cm${ductusWidthNormalValue}. `;
   } else if (pancreasToFat) {
     return `Kasa supantiems riebalams ${pancreasToFat}. `;
-  }  else if (ductusWidth) {
-    return `Kasos latako skersmuo ${ductusWidth} cm. `;
+  } else if (ductusWidth) {
+    return `Kasos latako skersmuo ${ductusWidth} cm${ductusWidthNormalValue}. `;
   }
 
   return "";

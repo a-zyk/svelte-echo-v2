@@ -1,5 +1,19 @@
-import inputsPresent from '$lib/helpers/inputsPresent'
-
+import inputsPresent from "$lib/helpers/inputsPresent";
+import normalRangesPresent from "$lib/helpers/normalRangesPresent";
+const NORMAL_VALUES = {
+  length: {
+    cat: "3-4.5 cm",
+    dog: "",
+  },
+  width: {
+    cat: "2.23-2.83 cm",
+    dog: "",
+  },
+  medullaWidth: {
+    cat: "<0.2cm cm",
+    dog: "<0.2cm cm",
+  },
+};
 export default {
   title: "Inkstai",
   name: "kidneys",
@@ -57,7 +71,7 @@ export default {
       type: "text",
     },
   ],
-  generate: (inputs, group) => {
+  generate: (inputs, group, animalInfo) => {
     const {
       medullaWidth,
       medulla,
@@ -79,8 +93,8 @@ export default {
         description += `Inksto žievė yra ${cortexToSpleen} blužnies parenchimai. `;
       }
 
-      description += generateSize({ width, length });
-      description += generateMedulla({ medulla, medullaWidth });
+      description += generateSize({ width, length, animalInfo });
+      description += generateMedulla({ medulla, medullaWidth,animalInfo });
 
       if (otherChanges) description += otherChanges;
     }
@@ -89,14 +103,16 @@ export default {
   },
 };
 
-const generateSize = ({ width, length }) => {
+const generateSize = ({ width, length, animalInfo }) => {
+  let lengthNoramlValue = normalRangesPresent(animalInfo, NORMAL_VALUES, "length")
+  let widthNormalValue = normalRangesPresent(animalInfo, NORMAL_VALUES, "width")
   let description = "";
-  
+
   if (length && !width) {
-    description += `Inksto ilgis ${length} cm. `;
+    description += `Inksto ilgis ${length} cm${lengthNoramlValue}. `;
   }
   if (width && !length) {
-    description += `Inksto plotis ${width} cm. `;
+    description += `Inksto plotis ${width} cm${widthNormalValue}. `;
   }
   if (width && length) {
     description += `Inksto ilgis ir plotis ${length}x${width} cm. `;
@@ -104,7 +120,7 @@ const generateSize = ({ width, length }) => {
   return description;
 };
 
-const generateMedulla = ({ medulla, medullaWidth }) => {
+const generateMedulla = ({ medulla, medullaWidth, animalInfo }) => {
   let description = "";
   if (medulla && !medullaWidth) {
     description += `Skersiniame pjūvyje geldelė ${medulla}. `;

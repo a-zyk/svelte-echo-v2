@@ -1,4 +1,4 @@
-import inputsPresent from '$lib/helpers/inputsPresent'
+import inputsPresent from "$lib/helpers/inputsPresent";
 
 export default {
   title: "Žarnynas",
@@ -33,6 +33,40 @@ export default {
         colon:
           "Normalios storosios žarnos sienelės storis katėms ir šunims yra ~0.15cm.",
       },
+      descriptionNormalValues: {
+        duodenum: {
+          cat: "0.22 cm",
+          dog: {
+            small: "0.38 cm",
+            medium: "0.41 cm",
+            large: "0.44 cm",
+          },
+        },
+        jejunum: {
+          cat: "0.22 cm",
+          dog: {
+            small: "0.3 cm",
+            medium: "0.35 cm)",
+            large: "0.38 cm",
+          },
+        },
+        ileocecal: {
+          cat: "0.28 cm",
+          dog: {
+            small: "0.3 cm",
+            medium: "0.35 cm",
+            large: "0.38 cm",
+          },
+        },
+        colon: {
+          cat: "0.15 cm",
+          dog: {
+            small: "0.15 cm",
+            medium: "0.15 cm",
+            large: "0.15 cm",
+          },
+        },
+      },
     },
 
     {
@@ -42,13 +76,10 @@ export default {
     },
   ],
   generate: (inputs, group) => {
-    const {
-      width,
-      otherChanges,
-    } = inputs;
+    const { width, otherChanges } = inputs;
 
     let description = "";
-    
+
     if (inputsPresent(inputs)) {
       if (group.name == "duodenum") {
         description += "Dvylikapirštė žarna. ";
@@ -70,4 +101,3 @@ export default {
     return description;
   },
 };
-
