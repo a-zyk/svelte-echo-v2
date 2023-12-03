@@ -6,10 +6,10 @@
 
   let description = "";
 
-  const generateDescription = (policy, inputs, group) => {
+  const generateDescription = (policy, inputs, group, info) => {
     if (!inputs) return "";
-
-    return policy.generate(inputs, group);
+    
+    return policy.generate(inputs, group, info);
   };
 
   const generatePolicyDescription = (policy) => {
@@ -20,7 +20,8 @@
         })
         .join("\n");
     } else {
-      return generateDescription(policy, $formInputs[policy.name], $animalInfo);
+      return generateDescription(policy, $formInputs[policy.name], null, $animalInfo);
+
     }
   };
 

@@ -9,6 +9,10 @@ const NORMAL_VALUES = {
     cat: "2.23-2.83 cm",
     dog: "",
   },
+  widthLength: {
+    cat: "2.23-2.83 cm x 3-4.5 cm",
+    dog: "",
+  },
   medullaWidth: {
     cat: "<0.2cm cm",
     dog: "<0.2cm cm",
@@ -94,7 +98,7 @@ export default {
       }
 
       description += generateSize({ width, length, animalInfo });
-      description += generateMedulla({ medulla, medullaWidth,animalInfo });
+      description += generateMedulla({ medulla, medullaWidth, animalInfo });
 
       if (otherChanges) description += otherChanges;
     }
@@ -104,32 +108,51 @@ export default {
 };
 
 const generateSize = ({ width, length, animalInfo }) => {
-  let lengthNoramlValue = normalRangesPresent(animalInfo, NORMAL_VALUES, "length")
-  let widthNormalValue = normalRangesPresent(animalInfo, NORMAL_VALUES, "width")
+  let lengthNormalValue = normalRangesPresent(
+    animalInfo,
+    NORMAL_VALUES,
+    "length"
+  );
+  let widthNormalValue = normalRangesPresent(
+    animalInfo,
+    NORMAL_VALUES,
+    "width"
+  );
+  let sizeNormalValue = normalRangesPresent(
+    animalInfo,
+    NORMAL_VALUES,
+    "widthLength"
+  );
+
   let description = "";
 
   if (length && !width) {
-    description += `Inksto ilgis ${length} cm${lengthNoramlValue}. `;
+    description += `Inksto ilgis ${length} cm${lengthNormalValue}. `;
   }
   if (width && !length) {
     description += `Inksto plotis ${width} cm${widthNormalValue}. `;
   }
   if (width && length) {
-    description += `Inksto ilgis ir plotis ${length}x${width} cm. `;
+    description += `Inksto ilgis ir plotis ${length}x${width} cm${sizeNormalValue}.`;
   }
   return description;
 };
 
 const generateMedulla = ({ medulla, medullaWidth, animalInfo }) => {
+  let widthNormalValue = normalRangesPresent(
+    animalInfo,
+    NORMAL_VALUES,
+    "medullaWidth"
+  );
   let description = "";
   if (medulla && !medullaWidth) {
     description += `Skersiniame pjūvyje geldelė ${medulla}. `;
   }
   if (medullaWidth && !medulla) {
-    description += `Skersiniame pjūvyje geldelės plotis ${medullaWidth} cm. `;
+    description += `Skersiniame pjūvyje geldelės plotis ${medullaWidth} cm${widthNormalValue}. `;
   }
   if (medullaWidth && medulla) {
-    description += `Skersiniame pjūvyje geldelė ${medulla}, plotis ${medullaWidth} cm. `;
+    description += `Skersiniame pjūvyje geldelė ${medulla}, plotis ${medullaWidth} cm${widthNormalValue}. `;
   }
   return description;
 };

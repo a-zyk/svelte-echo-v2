@@ -1,5 +1,40 @@
 import inputsPresent from "$lib/helpers/inputsPresent";
 
+import normalRangesPresent from "$lib/helpers/normalRangesPresent";
+const NORMAL_VALUES = {
+  duodenum: {
+    cat: "0.22 cm",
+    dog: {
+      small: "0.38 cm",
+      medium: "0.41 cm",
+      large: "0.44 cm",
+    },
+  },
+  jejunum: {
+    cat: "0.22 cm",
+    dog: {
+      small: "0.3 cm",
+      medium: "0.35 cm",
+      large: "0.38 cm",
+    },
+  },
+  ileocecal: {
+    cat: "0.28 cm",
+    dog: {
+      small: "0.3 cm",
+      medium: "0.35 cm",
+      large: "0.38 cm",
+    },
+  },
+  colon: {
+    cat: "0.15 cm",
+    dog: {
+      small: "0.15 cm",
+      medium: "0.15 cm",
+      large: "0.15 cm",
+    },
+  },
+};
 export default {
   title: "Žarnynas",
   name: "intestines",
@@ -33,40 +68,6 @@ export default {
         colon:
           "Normalios storosios žarnos sienelės storis katėms ir šunims yra ~0.15cm.",
       },
-      descriptionNormalValues: {
-        duodenum: {
-          cat: "0.22 cm",
-          dog: {
-            small: "0.38 cm",
-            medium: "0.41 cm",
-            large: "0.44 cm",
-          },
-        },
-        jejunum: {
-          cat: "0.22 cm",
-          dog: {
-            small: "0.3 cm",
-            medium: "0.35 cm)",
-            large: "0.38 cm",
-          },
-        },
-        ileocecal: {
-          cat: "0.28 cm",
-          dog: {
-            small: "0.3 cm",
-            medium: "0.35 cm",
-            large: "0.38 cm",
-          },
-        },
-        colon: {
-          cat: "0.15 cm",
-          dog: {
-            small: "0.15 cm",
-            medium: "0.15 cm",
-            large: "0.15 cm",
-          },
-        },
-      },
     },
 
     {
@@ -75,8 +76,14 @@ export default {
       type: "text",
     },
   ],
-  generate: (inputs, group) => {
+  generate: (inputs, group, animalInfo) => {
     const { width, otherChanges } = inputs;
+
+    let widthNormalValue = normalRangesPresent(
+      animalInfo,
+      NORMAL_VALUES,
+      group.name
+    );
 
     let description = "";
 
@@ -92,7 +99,7 @@ export default {
       }
 
       if (width) {
-        description += `Sienelės storis ${width} cm. `;
+        description += `Sienelės storis ${width} cm${widthNormalValue}. `;
       }
 
       if (otherChanges) description += otherChanges;
