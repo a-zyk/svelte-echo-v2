@@ -1,6 +1,6 @@
 <script>
   import { Tooltip as TooltipIcon } from "$lib/icons";
-  import { Tooltip } from "@svelte-plugins/tooltips";
+  // import { Tooltip } from "@svelte-plugins/tooltips";
   export let tooltip;
   export let prefix;
 
@@ -13,9 +13,12 @@
   }
 </script>
 
+<div class="tooltip tooltip-right font-medium" data-tip={tooltipText}>
+  <TooltipIcon />
+</div>
 
-
-  <Tooltip content={tooltipText} position="right" >
-    <TooltipIcon />
-  </Tooltip>
-
+<style>
+  .tooltip::before {
+    padding: 10px;
+  }
+</style>

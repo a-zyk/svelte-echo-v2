@@ -1,39 +1,28 @@
 <script>
+  import PolicySelect from "$lib/policySelect.svelte";
   import PolicyInput from "$lib/PolicyInput.svelte";
   import policies from "$lib/policy.js";
   import Description from "$lib/Description.svelte";
-  import NormalValueSelect from "$lib/NormalValueSelect.svelte";
   import AnimalInfo from "$lib/AnimalInfo.svelte";
-
-  let checkedOrgans = [];
+  import { policiesSelect } from "$lib/stores/policiesSelect";
 
   const matchOrgans = (items, organs) => {
     return items.filter((item) => organs.includes(item.name));
   };
-
-  $: matchedPolicies = matchOrgans(policies, checkedOrgans);
+  $: matchedPolicies = matchOrgans(policies, $policiesSelect);
 </script>
 
-<Description policies={matchedPolicies} />
-
-<AnimalInfo />
-<div>Pasirinkti tirtus organus:</div>
-<div class="flex flex-col gap-2">
-  {#each policies as policy}
-    <div>
-      <input
-        type="checkbox"
-        id={policy.name}
-        value={policy.name}
-        bind:group={checkedOrgans}
-      />
-      <label for={policy.name}>{policy.title}</label>
-    </div>
-  {/each}
+<div class="flex">
   <div>
-    <NormalValueSelect />
+    <div class="flex w-50%">
+      <PolicySelect {policies} />
+    </div>
+    {#each matchedPolicies as item}
+      <PolicyInput {item} />
+    {/each}
+  </div>
+  <div>
+    <Description policies={matchedPolicies} />
+    <AnimalInfo />
   </div>
 </div>
-{#each matchedPolicies as item}
-  <PolicyInput {item} />
-{/each}

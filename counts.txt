@@ -1,0 +1,14 @@
+kidney                         248
+liver                          87
+bladder                        76
+spleen                         74
+gallBladder                    64
+stomach                        32
+undefined                      12
+duodenum                       10
+femaleOvary                    9
+adrenal                        6
+maleProstate                   6
+jejunum                        3
+pancreas                       1
+femaleUterus                   1

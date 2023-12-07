@@ -1,14 +1,14 @@
 <script>
   import { formInputs } from "$lib/stores/formInputs";
   import { animalInfo } from "$lib/stores/animalInfo";
-
+  import CopyDescription from "./copyDescription.svelte";
   export let policies = [];
 
-  let description = "";
+  let description = "f";
 
   const generateDescription = (policy, inputs, group, info) => {
     if (!inputs) return "";
-    
+
     return policy.generate(inputs, group, info);
   };
 
@@ -16,12 +16,21 @@
     if (policy.groups) {
       return policy.groups
         .map((group) => {
-          return generateDescription(policy, $formInputs[group.name], group, $animalInfo);
+          return generateDescription(
+            policy,
+            $formInputs[group.name],
+            group,
+            $animalInfo
+          );
         })
         .join("\n");
     } else {
-      return generateDescription(policy, $formInputs[policy.name], null, $animalInfo);
-
+      return generateDescription(
+        policy,
+        $formInputs[policy.name],
+        null,
+        $animalInfo
+      );
     }
   };
 
@@ -34,4 +43,10 @@
   }
 </script>
 
-{description}
+  <div class="card card-body flex flex-col gap-10">
+    <div class="card-title">Echoskopijos aprašymas</div>
+    {description}
+    {#if description.length}
+      <CopyDescription {description} />
+    {/if}
+  </div>

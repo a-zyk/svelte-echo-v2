@@ -22,7 +22,7 @@ export default {
       type: "text",
     },
   ],
-  generate: (inputs, animalInfo) => {
+  generate: (inputs, _, animalInfo) => {
     const { wallWidth, otherChanges } = inputs;
 let wallWidthNormalValue = normalRangesPresent(animalInfo, NORMAL_VALUES, "wallWidth")
     let description = "";

@@ -48,7 +48,7 @@ export default {
       type: "text",
     },
   ],
-  generate: (inputs, animalInfo) => {
+  generate: (inputs, _, animalInfo) => {
     const { wallWidth, width, commonDuctus, commonDuctusWidth, otherChanges } =
       inputs;
 

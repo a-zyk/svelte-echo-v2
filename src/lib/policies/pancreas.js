@@ -31,7 +31,7 @@ export default {
       type: "text",
     },
   ],
-  generate: (inputs, animalInfo) => {
+  generate: (inputs, _, animalInfo) => {
     const { pancreasToFat, ductusWidth, otherChanges } = inputs;
 
     let description = "";

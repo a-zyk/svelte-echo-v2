@@ -21,7 +21,7 @@ export default {
       title: "Šlapimo pūslės sienelės storis, cm",
       name: "wallWidth",
       type: "number",
-      tooltip: "Normalus šlapimo pūslės sienelės storis 0.1 cm",
+      tooltip: "Normalus šlapimo pūslės sienelės storis yra ≤0.17 cm",
     },
     {
       title: "Kiti pakitimai",
@@ -29,7 +29,7 @@ export default {
       type: "text",
     },
   ],
-  generate: (inputs, animalInfo) => {
+  generate: (inputs,_, animalInfo) => {
     const { wallThickness, wallWidth, otherChanges } = inputs;
     let description = "";
 
@@ -56,7 +56,7 @@ const generateBladderParameters = ({
     NORMAL_VALUES,
     "wallWidth"
   );
-
+console.log(animalInfo)
   if (wallWidth && !wallThickness) {
     return `Šlapimo pūslės sienelės storis yra ${wallWidth} cm${wallWidthRange}. `;
   }

@@ -25,7 +25,7 @@
   {#if input.type == "number"}
     <input
       bind:value={$formInputs[prefix][name]}
-      class="mb-4 py-3 px-4 border-2 border-blue-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500"
+      class="input input-bordered  mb-4 py-2 h-max rounded-lg text-sm"
       min="0"
       {name}
       type="number"
@@ -33,15 +33,17 @@
   {:else if input.type == "text"}
     <textarea
       bind:value={$formInputs[prefix][name]}
-      class=" mb-4 py-3 px-4 border-2 border-blue-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500"
+      class="textarea textarea-bordered mb-4 py-3 px-4 border-2 rounded-lg text-sm"
       {name}
     />
   {:else if input.type == "radio"}
     <div class="flex gap-2 mb-4">
       {#each input.options as option}
-        <label>
+
+
+        <label class="flex items-center justify-center gap-2 mb-2">
           <input
-            class="mb-4"
+            class=" radio radio-sm"
             {name}
             bind:group={$formInputs[prefix][name]}
             type="radio"
@@ -50,6 +52,7 @@
           />
           {option}
         </label>
+  
       {/each}
     </div>
   {:else}
