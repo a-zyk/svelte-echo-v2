@@ -12,17 +12,19 @@
   $: matchedPolicies = matchOrgans(policies, $policiesSelect);
 </script>
 
-<div class="flex">
-  <div>
-    <div class="flex w-50%">
-      <PolicySelect {policies} />
+<div class="flex w-full justify-center">
+  <div class="flex md:w-[600px] lg:w-[900px]">
+    <div class="w-50%">
+      <div class="flex">
+        <PolicySelect {policies} />
+      </div>
+      {#each matchedPolicies as item}
+        <PolicyInput {item} />
+      {/each}
     </div>
-    {#each matchedPolicies as item}
-      <PolicyInput {item} />
-    {/each}
-  </div>
-  <div>
-    <Description policies={matchedPolicies} />
-    <AnimalInfo />
+    <div class="w-50%">
+      <Description policies={matchedPolicies} />
+      <AnimalInfo />
+    </div>
   </div>
 </div>

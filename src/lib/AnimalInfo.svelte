@@ -4,6 +4,8 @@
   let normalValuesShown = false;
   const toggleNormalValues = () => {
     normalValuesShown = !normalValuesShown;
+    $animalInfo = [];
+
   };
 </script>
 
@@ -13,7 +15,7 @@
       >{#if normalValuesShown}
         Normalių reikšmių rėžiai rodomi
       {:else if !normalValuesShown}
-        Slėpti reikšmių rėžius aprašyme
+       Aprašyme rodyti normalių reikšmių rėžius.
       {/if}</button
     >
     {#if normalValuesShown}

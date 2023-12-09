@@ -45,7 +45,10 @@
 
   <div class="card card-body flex flex-col gap-10">
     <div class="card-title">Echoskopijos aprašymas</div>
-    {description}
+    <div>
+
+      {description}
+    </div>
     {#if description.length}
       <CopyDescription {description} />
     {/if}
