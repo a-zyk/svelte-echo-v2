@@ -89,13 +89,13 @@ export default {
 
     if (inputsPresent(inputs)) {
       if (group.name == "duodenum") {
-        description += "Dvylikapirštė žarna. ";
+        description += "Dvylikapirštė žarna: ";
       } else if (group.name == "jejunum") {
-        description += "Tuščioji žarna. ";
+        description += "Tuščioji žarna: ";
       } else if (group.name == "ileocecal") {
-        description += "Klubinė žarna. ";
+        description += "Klubinė žarna: ";
       } else if (group.name == "colon") {
-        description += "Storoji žarna. ";
+        description += "Storoji žarna: ";
       }
 
       if (width) {

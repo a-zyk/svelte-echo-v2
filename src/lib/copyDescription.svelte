@@ -3,7 +3,7 @@
   
   let showTooltip = false;
   const copy = () => {
-    navigator.clipboard.writeText(description);
+    navigator.clipboard.writeText(description.replace('<br>', ''));
     showTooltip = true;
     setTimeout(() => {
       showTooltip = false;

@@ -22,8 +22,7 @@
             group,
             $animalInfo
           );
-        })
-        .join("\n");
+        }).join('<br><br>')
     } else {
       return generateDescription(
         policy,
@@ -39,17 +38,16 @@
     $animalInfo;
     description = policies
       .map((policy) => generatePolicyDescription(policy))
-      .join("\n");
+      .join("<br><br>");
   }
 </script>
 
-  <div class="card card-body flex flex-col gap-10">
-    <div class="card-title">Echoskopijos aprašymas</div>
-    <div>
-
-      {description}
-    </div>
-    {#if description.length}
-      <CopyDescription {description} />
-    {/if}
+<div class="card card-body flex flex-col gap-10">
+  <div class="card-title">Echoskopijos aprašymas</div>
+  <div>
+    {@html description}
   </div>
+  {#if description.length}
+    <CopyDescription {description} />
+  {/if}
+</div>

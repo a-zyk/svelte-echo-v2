@@ -88,9 +88,9 @@ export default {
     let description = "";
     if (inputsPresent(inputs)) {
       if (group.name == "leftKidney") {
-        description += "Kairys inkstas. ";
+        description += "Kairys inkstas: ";
       } else if (group.name == "rightKidney") {
-        description += "Dešinys inkstas. ";
+        description += "Dešinys inkstas: ";
       }
 
       if (cortexToSpleen) {
