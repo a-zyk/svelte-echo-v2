@@ -38,7 +38,9 @@
     $animalInfo;
     description = policies
       .map((policy) => generatePolicyDescription(policy))
-      .join("<br><br>");
+      .join("<br><br>")
+      .replaceAll(/(^(<br>)+)|((<br>)+$)/g, '')
+      .replaceAll(/(<br>){3,}/g, '<br><br>')
   }
 </script>
 
@@ -47,7 +49,7 @@
   <div>
     {@html description}
   </div>
-  {#if description.length}
+  {#if description.replace('<br>', '').length}
     <CopyDescription {description} />
   {/if}
 </div>
